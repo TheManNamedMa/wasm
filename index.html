@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>title</title>
+</head>
+
+<body>
+
+</body>
+
+
+<script src='/pkg/package.js'></script>
+<script type="module">
+
+
+	const { plus } = wasm_bindgen;
+
+	async function run() {
+		await wasm_bindgen();  // 初始化 WebAssembly 模块
+		// 可以在这里调用 Rust 函数，例如:
+		// const result = wasmFunction();
+		console.log("WebAssembly module initialized");
+		const result = plus(2, 4)
+
+		console.log('result', result)
+	}
+
+	run();
+</script>
+
+</html>
