@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>title</title>
+</head>
+
+<body>
+
+</body>
+<!-- --target web -->
+<!-- <script type="module">
+	import init from './pkg/package.js';  // 引用生成的 JavaScript 文件
+
+	async function run() {
+		const { plus } = await init();  // 初始化 WebAssembly 模块
+		// 可以在这里调用 Rust 函数，例如:
+		// const result = wasmFunction();
+		console.log("WebAssembly module initialized");
+		const value = plus(10.2, -2);
+		console.log('result', value);
+	}
+	run();
+</script> -->
+
+<!-- --target no-modules -->
+<script src="./pkg/package.js">
+</script>
+<script>
+	async function init() {
+		// 使用wasm-bindgen提供的函数加载并实例化WASM模块
+		const { plus } = await wasm_bindgen('./pkg/package_bg.wasm');
+		// 此时instance已准备好，你可以调用wasm_bindgen生成的JavaScript接口了
+		const value = plus(10.2, -2);
+		console.log('result', value);
+	}
+	// 初始化
+	init().catch(console.error);
+</script>
+
+
+
+</html>
